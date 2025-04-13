@@ -5,14 +5,14 @@ import { useToast } from 'vue-toastification';
 const toast = useToast();
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: import.meta.env.VITE_API_URL,
   timeout: 10000
 });
 
-// 📌 Вставка токена в каждый запрос
+// ✅ Всегда вставляем токен, если есть
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('authToken');
-  if (token && config.baseURL?.includes('localhost')) {
+  if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
