@@ -49,7 +49,7 @@ export default {
     this.isAdmin = user?.role === 'admin';
 
     try {
-      const res = await this.$axios.get('/news');
+      const res = await this.$api.get('/news');
       this.newsList = res.data;
     } catch (err) {
       console.error('Ошибка загрузки новостей:', err);
