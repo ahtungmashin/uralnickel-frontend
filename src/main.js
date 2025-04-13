@@ -16,8 +16,6 @@ const app = createApp(App);
 app.config.globalProperties.$api = api;
 
 const pinia = createPinia();
-// Базовый адрес для API
-axios.defaults.baseURL = 'http://localhost:5000/api';
 
 // Добавление токена ко всем запросам
 axios.interceptors.request.use((config) => {

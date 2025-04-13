@@ -43,7 +43,7 @@ export default {
         date: '',
       },
       image: null,
-      baseURL: 'http://localhost:5000'
+      baseURL: import.meta.env.VITE_API_URL
     };
   },
   async mounted() {

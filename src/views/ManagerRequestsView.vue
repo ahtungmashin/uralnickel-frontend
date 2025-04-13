@@ -11,7 +11,7 @@ export default {
       certificates: [],
       courses: [],
       selectedCourses: {}, // ключ — cert.id, значение — course.id
-      baseURL: 'http://localhost:5000',
+      baseURL: import.meta.env.VITE_API_URL,
       toast: useToast()
     };
   },

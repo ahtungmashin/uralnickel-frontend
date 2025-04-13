@@ -36,7 +36,7 @@ export default {
     return {
       newsList: [],
       isAdmin: false,
-      baseURL: 'http://localhost:5000'
+      baseURL: import.meta.env.VITE_API_URL
     };
   },
   computed: {

@@ -87,7 +87,7 @@ export default {
       selectedCertificateFile: null,
       certificateName: '',
       availableCourses: [],
-      baseURL: 'http://localhost:5000',
+      baseURL: import.meta.env.VITE_API_URL,
       fields: {
         department: 'Отдел',
         position: 'Должность',

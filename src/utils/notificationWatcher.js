@@ -11,11 +11,12 @@ export function startNotificationWatcher({ store, toast }) {
   const token = localStorage.getItem('authToken');
   const user = JSON.parse(localStorage.getItem('user') || '{}');
   if (!user.id || !token) return;
+  const backendURL = import.meta.env.VITE_API_URL?.replace('/api', '');
 
-  socket = io('http://localhost:5000', {
+  socket = io(backendURL, {
     auth: { token }
   });
-
+  
   const channel = `notification-${user.id}`;
 
   socket.off(channel);
