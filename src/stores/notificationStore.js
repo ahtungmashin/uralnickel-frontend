@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import api from './services/api';
 
 export const useNotificationStore = defineStore('notification', {
   state: () => ({
@@ -26,7 +27,7 @@ export const useNotificationStore = defineStore('notification', {
       }
 
       try {
-        const res = await this.$api.get('/notifications', {
+        const res = await api.get('/notifications', {
           headers: { Authorization: `Bearer ${token}` }
         });
         this.notifications = res.data;
