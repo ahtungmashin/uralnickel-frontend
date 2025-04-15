@@ -51,7 +51,7 @@ export default {
   },
   methods: {
     async fetchNews() {
-      const res = await this.$axios.get('/news');
+      const res = await this.$api.get('/news');
       this.news = res.data;
     },
     onFileChange(e) {
@@ -64,14 +64,14 @@ export default {
       formData.append('date', this.newNews.date);
       if (this.image) formData.append('image', this.image);
 
-      await this.$axios.post('/news', formData);
+      await this.$api.post('/news', formData);
       this.newNews = { title: '', description: '', date: '' };
       this.image = null;
       await this.fetchNews();
     },
     async deleteNews(id) {
       if (!confirm('Удалить эту новость?')) return;
-      await this.$axios.delete(`/news/${id}`);
+      await this.$api.delete(`/news/${id}`);
       this.news = this.news.filter(n => n.id !== id);
     },
     formatDate(date) {

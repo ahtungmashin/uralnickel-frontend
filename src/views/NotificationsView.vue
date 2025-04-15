@@ -91,7 +91,7 @@ export default {
     async fetchNotifications() {
       try {
         const token = localStorage.getItem('authToken');
-        const res = await this.$axios.get('/notifications', {
+        const res = await this.$api.get('/notifications', {
           headers: { Authorization: `Bearer ${token}` }
         });
         this.notifications = res.data;
@@ -101,7 +101,7 @@ export default {
     },
     async markAsRead(id) {
       try {
-        await this.$axios.patch(`/notifications/${id}/read`);
+        await this.$api.patch(`/notifications/${id}/read`);
         const notif = this.notifications.find(n => n.id === id);
         if (notif) notif.read = true;
       } catch (err) {
@@ -112,7 +112,7 @@ export default {
       try {
         await Promise.all(
           this.notifications.filter(n => !n.read).map(n =>
-            this.$axios.patch(`/notifications/${n.id}/read`)
+            this.$api.patch(`/notifications/${n.id}/read`)
           )
         );
         this.notifications.forEach(n => (n.read = true));

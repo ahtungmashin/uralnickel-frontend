@@ -111,7 +111,7 @@ export default {
   },
   async mounted() {
     try {
-      const usersRes = await this.$axios.get('/users');
+      const usersRes = await this.$api.get('/users');
       this.users = usersRes.data;
     } catch (err) {
       console.error('Ошибка при инициализации:', err);
@@ -193,7 +193,7 @@ export default {
 
         fd.append('photo', this.imageFile);
 
-        await this.$axios.post('/projects', fd);
+        await this.$api.post('/projects', fd);
         this.successMessage = 'Проект успешно создан!';
         setTimeout(() => this.$router.push('/projects'), 1500);
       } catch (err) {

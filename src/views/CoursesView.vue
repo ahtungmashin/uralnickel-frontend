@@ -81,7 +81,7 @@ export default {
       const user = JSON.parse(localStorage.getItem('user'));
       this.isAdmin = user?.role === 'admin';
 
-      const res = await this.$axios.get('/courses', {
+      const res = await this.$api.get('/courses', {
         headers: { Authorization: `Bearer ${token}` },
       });
       this.courses = res.data;

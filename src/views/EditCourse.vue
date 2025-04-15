@@ -164,7 +164,7 @@ export default {
   methods: {
     async fetchCourses() {
       const token = localStorage.getItem('authToken');
-      const res = await this.$axios.get('/courses/all', {
+      const res = await this.$api.get('/courses/all', {
         headers: { Authorization: `Bearer ${token}` }
       });
       this.courses = res.data.map(course => ({
@@ -191,7 +191,7 @@ export default {
       if (course.file) formData.append('photo', course.file);
 
       const token = localStorage.getItem('authToken');
-      await this.$axios.put(`/courses/${course.id}`, formData, {
+      await this.$api.put(`/courses/${course.id}`, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -202,7 +202,7 @@ export default {
     },
     async deleteCourse(id) {
       const token = localStorage.getItem('authToken');
-      await this.$axios.delete(`/courses/${id}`, {
+      await this.$api.delete(`/courses/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       this.courses = this.courses.filter(c => c.id !== id);
@@ -220,7 +220,7 @@ export default {
       if (this.newCourse.file) formData.append('photo', this.newCourse.file);
 
       const token = localStorage.getItem('authToken');
-      const res = await this.$axios.post('/courses', formData, {
+      const res = await this.$api.post('/courses', formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'

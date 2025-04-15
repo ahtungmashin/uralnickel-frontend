@@ -86,7 +86,7 @@ export default {
     const courseId = this.$route.params.id;
     try {
       const token = localStorage.getItem('authToken');
-      const res = await this.$axios.get(`/courses`, {
+      const res = await this.$api.get(`/courses`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       this.course = res.data.find(c => c.id === parseInt(courseId));
@@ -103,7 +103,7 @@ export default {
   async enroll() {
     try {
       const token = localStorage.getItem('authToken');
-      const res = await this.$axios.post(
+      const res = await this.$api.post(
         `/courses/${this.course.id}/apply`,
         { title: this.course.title }, // для уведомлений
         {
