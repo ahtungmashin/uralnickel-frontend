@@ -148,7 +148,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { Modal } from 'bootstrap';
 
 export default {
@@ -159,7 +158,7 @@ export default {
       users: [],
       user: JSON.parse(localStorage.getItem('user') || '{}'),
       isAdminMode: false,
-      baseURL: 'http://localhost:5000',
+      baseURL: import.meta.env.VITE_API_URL.replace('/api', ''),
 
       // Удаление
       toDelete: null,
@@ -201,11 +200,11 @@ export default {
   },
   methods: {
     async fetchProjects() {
-      const res = await axios.get('/projects');
+      const res = await this.$api.get('/projects');
       this.projects = res.data;
     },
     async fetchUsers() {
-      const res = await axios.get('/users');
+      const res = await this.$api.get('/users');
       this.users = res.data;
     },
     formatDate(dateStr) {
@@ -232,7 +231,7 @@ export default {
 
       try {
         const token = localStorage.getItem('authToken');
-        const res = await axios.post(
+        const res = await this.$api.post(
           `/project-requests/${project.id}/request`,
           {},
           {
@@ -261,7 +260,7 @@ export default {
     },
     async deleteProject() {
       try {
-        await axios.delete(`/projects/${this.toDelete.id}`);
+        await this.$api.delete(`/projects/${this.toDelete.id}`);
         this.toDelete = null;
         await this.fetchProjects();
         Modal.getInstance(this.$refs.confirmModal).hide();
@@ -347,10 +346,7 @@ export default {
     }
 
     //PUT-запрос с FormData
-    await axios({
-      method: 'put',
-      url: `/projects/${this.editingProject.id}`,
-      data: fd,
+    await this.$api.put(`/projects/${this.editingProject.id}`, fd, {
       headers: {
         'Content-Type': 'multipart/form-data'
       }

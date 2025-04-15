@@ -1,5 +1,4 @@
 <script>
-import axios from 'axios';
 import { useToast } from 'vue-toastification';
 
 export default {
@@ -19,10 +18,10 @@ export default {
     async fetchAll() {
       try {
         const [courseRes, projectRes, certRes, allCoursesRes] = await Promise.all([
-          axios.get('/requests'),
-          axios.get('/project-requests'),
-          axios.get('/certificates'),
-          axios.get('/courses')
+          this.$api.get('/requests'),
+          this.$api.get('/project-requests'),
+          this.$api.get('/certificates'),
+          this.$api.get('/courses')
         ]);
 
         this.courseRequests = courseRes.data;
@@ -36,7 +35,7 @@ export default {
     },
     async approveCourse(id) {
       try {
-        await axios.patch(`/requests/${id}/approve`);
+        await this.$api.patch(`/requests/${id}/approve`);
         this.toast.success('Заявка на курс подтверждена ✅');
         this.fetchAll();
       } catch {
@@ -45,7 +44,7 @@ export default {
     },
     async rejectCourse(id) {
       try {
-        await axios.patch(`/requests/${id}/reject`);
+        await this.$api.patch(`/requests/${id}/reject`);
         this.toast.warning('Заявка на курс отклонена ❌');
         this.fetchAll();
       } catch {
@@ -54,7 +53,7 @@ export default {
     },
     async approveProject(id) {
       try {
-        await axios.patch(`/project-requests/${id}/approve`);
+        await this.$api.patch(`/project-requests/${id}/approve`);
         this.toast.success('Заявка на проект подтверждена ✅');
         this.fetchAll();
       } catch {
@@ -63,7 +62,7 @@ export default {
     },
     async rejectProject(id) {
       try {
-        await axios.patch(`/project-requests/${id}/reject`);
+        await this.$api.patch(`/project-requests/${id}/reject`);
         this.toast.warning('Заявка на проект отклонена ❌');
         this.fetchAll();
       } catch {
@@ -77,7 +76,7 @@ export default {
       }
 
       try {
-        await axios.patch(`/certificates/${cert.id}/verify`, {
+        await this.$api.patch(`/certificates/${cert.id}/verify`, {
           course_id: courseId
         });
         this.toast.success('Сертификат подтверждён ✅');
