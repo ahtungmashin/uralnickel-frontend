@@ -62,7 +62,7 @@ export default {
   data() {
     return {
       courses: [],
-      baseURL: import.meta.env.VITE_API_URL,
+      baseURL: import.meta.env.VITE_API_URL.replace('/api', ''),
       isAdmin: false,
     };
   },

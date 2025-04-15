@@ -139,7 +139,7 @@ export default {
         link: '',
         file: null
       },
-      baseURL: import.meta.env.VITE_API_URL
+      baseURL: import.meta.env.VITE_API_URL.replace('/api', '')
     };
   },
   computed: {

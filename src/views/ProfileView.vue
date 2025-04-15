@@ -87,7 +87,7 @@ export default {
       selectedCertificateFile: null,
       certificateName: '',
       availableCourses: [],
-      baseURL: import.meta.env.VITE_API_URL,
+      baseURL: import.meta.env.VITE_API_URL.replace('/api', ''),
       fields: {
         department: 'Отдел',
         position: 'Должность',
