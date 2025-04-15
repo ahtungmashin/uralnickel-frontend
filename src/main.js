@@ -8,7 +8,7 @@ import { startIdleTimer } from './utils/authWatcher';
 import Toast from 'vue-toastification';
 import 'vue-toastification/dist/index.css';
 import { createPinia } from 'pinia';
-import api from './services/api';
+import api from '@/services/api';
 
 
 const app = createApp(App);
